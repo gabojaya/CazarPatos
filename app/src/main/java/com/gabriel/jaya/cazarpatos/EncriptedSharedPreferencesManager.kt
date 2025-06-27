@@ -5,12 +5,12 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 class EncriptedSharedPreferencesManager (actividad: Activity):FileHandler {
-    //Validar si existen datos en archivo de preferencia, y cargar
+
     val masterKey = MasterKey.Builder(actividad)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
-    val sharedPreferences = EncryptedSharedPreferences.create( actividad,//context
-        "secret_shared_prefs",//filename
+    val sharedPreferences = EncryptedSharedPreferences.create( actividad,
+        "secret_shared_prefs",
         masterKey,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM

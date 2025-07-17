@@ -7,8 +7,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import androidx.appcompat.app.AppCompatActivity
+
 
 class LoginActivity : AppCompatActivity() {
     lateinit var editTextEmail: EditText
@@ -19,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var manejadorArchivo: FileHandler
     lateinit var checkBoxRecordarme: CheckBox
+    private lateinit var auth: FirebaseAuth
 
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +39,8 @@ class LoginActivity : AppCompatActivity() {
             buttonLogin = findViewById(R.id.buttonLogin)
             buttonNewUser = findViewById(R.id.buttonNewUser)
             checkBoxRecordarme = findViewById(R.id.checkBoxRecordarme)
+            // Initialize Firebase Auth
+            auth = Firebase.auth
 
             /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -51,9 +59,10 @@ class LoginActivity : AppCompatActivity() {
                 //Guardar datos en preferencias.
                 guardarDatosEnPreferencias()
                 //Si pasa validación de datos requeridos, ir a pantalla principal
-                val intencion = Intent(this, MainActivity::class.java)
-                intencion.putExtra(EXTRA_LOGIN, email)
-                startActivity(intencion)
+                //val intencion = Intent(this, MainActivity::class.java)
+                //intencion.putExtra(EXTRA_LOGIN, email)
+                //startActivity(intencion)
+                AutenticarUsuario(email, clave)
             }
             buttonNewUser.setOnClickListener{
 
@@ -62,8 +71,29 @@ class LoginActivity : AppCompatActivity() {
             mediaPlayer.start()
     }
 
+    fun AutenticarUsuario(email:String, password:String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(EXTRA_LOGIN, "signInWithEmail:success")
+                    //Si pasa validación de datos requeridos, ir a pantalla principal
+                    val intencion = Intent(this, MainActivity::class.java)
+                    intencion.putExtra(EXTRA_LOGIN, auth.currentUser!!.email)
+                    startActivity(intencion)
+                    //finish()
+                } else {
+                    Log.w(EXTRA_LOGIN, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, task.exception!!.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
 
-    private fun validarDatosRequeridos():Boolean{
+
+
+        private fun validarDatosRequeridos():Boolean{
         val email = editTextEmail.text.toString()
         val password = editTextPassword.text.toString()
         if (email.isEmpty()) {

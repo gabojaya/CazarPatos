@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.utils.addToStdlib.applyIf
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -52,6 +54,7 @@ dependencies {
     implementation(libs.google.firebase.auth.ktx)
     implementation(libs.firebase.auth)
     implementation(libs.google.firebase.firestore.ktx)
+    implementation(libs.play.services.ads)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_game"
-    android:padding="50dp"
+    android:padding="32dp"
     tools:context=".MainActivity">
     <ImageView
         android:id="@+id/imageViewDuck"
@@ -14,37 +14,12 @@
         android:layout_height="100dp"
         app:srcCompat="@drawable/duck"
         tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="239dp"
-        />
-
-    <TextView
-        android:id="@+id/textViewUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/pixel"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/pixel"
-        android:text="60s"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="239dp" />
 
     <ImageView
         android:id="@+id/imageViewCounter"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="52dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/duck_hunt_logo" />
@@ -58,8 +33,19 @@
         android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewCounter"
         app:layout_constraintStart_toEndOf="@+id/imageViewCounter"
-        app:layout_constraintTop_toTopOf="@+id/imageViewCounter"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewCounter" />
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/pixel"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewTime"
@@ -69,7 +55,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewTime"
         app:layout_constraintEnd_toStartOf="@+id/textViewTime"
         app:layout_constraintTop_toTopOf="@+id/textViewTime"
-        app:layout_constraintVertical_bias="0.1"
         app:srcCompat="@drawable/timer" />
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pixel"
+        android:text="60s"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

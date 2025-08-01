@@ -8,7 +8,7 @@
     <string name="text_new_user">New user</string>
     <string name="error_email_required">Email is required</string>
     <string name="error_password_required">Password is required</string>
-    <string name="error_password_min_length">The password must have at least 3 characters</string>
+    <string name="error_password_min_length">The password must have at least 8 characters</string>
 
     <string name="dialog_title_game_end">End of the game</string>
     <string name="dialog_message_congratulations">Congratulations!!\nYou hunted %1$d ducks</string>
@@ -21,4 +21,7 @@
     <string name="text_new_game">New Game</string>
     <string name="text_play_online">Play Online</string>
     <string name="text_close">Close</string>
+    <string name="registrar">Registrar</string>
+    <string name="regresar_a_login">Regresar a Login</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
 </resources>

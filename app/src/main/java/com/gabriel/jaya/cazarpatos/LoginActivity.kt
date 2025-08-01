@@ -64,11 +64,24 @@ class LoginActivity : AppCompatActivity() {
                 //startActivity(intencion)
                 AutenticarUsuario(email, clave)
             }
-            buttonNewUser.setOnClickListener{
 
+            buttonNewUser.setOnClickListener {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
             }
+
             mediaPlayer=MediaPlayer.create(this, R.raw.title_screen)
             mediaPlayer.start()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(EXTRA_LOGIN, currentUser.email)
+            startActivity(intent)
+        }
     }
 
     fun AutenticarUsuario(email:String, password:String) {
@@ -106,7 +119,7 @@ class LoginActivity : AppCompatActivity() {
             editTextPassword.requestFocus()
             return false
         }
-        if (password.length < 3) {
+        if (password.length < 8) {
             editTextPassword.setError(getString(R.string.error_password_min_length))
             editTextPassword.requestFocus()
             return false
@@ -134,8 +147,8 @@ class LoginActivity : AppCompatActivity() {
         manejadorArchivo.SaveInformation(listadoAGrabar)
 
         // Guardar en EncryptedSharedPreferences (usando los datos del checkbox para el ejemplo)
-        manejadorArchivo = EncriptedSharedPreferencesManager(this)
-        manejadorArchivo.SaveInformation(listadoAGrabar)
+        //manejadorArchivo = EncriptedSharedPreferencesManager(this)
+        //manejadorArchivo.SaveInformation(listadoAGrabar)
 
         // Guardar en Archivo Interno
         manejadorArchivo = FileInternalManager(this)
@@ -161,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
         editTextPassword.setText ( listadoLeido.second )
 
         //EncriptedSharedPreferencesManager
-        manejadorArchivo = EncriptedSharedPreferencesManager(this)
+        manejadorArchivo = SharedPreferencesManager(this)
 
         listadoLeido = manejadorArchivo.ReadInformation()
         if(listadoLeido.first != null){
@@ -172,9 +185,9 @@ class LoginActivity : AppCompatActivity() {
         editTextPassword.setText ( listadoLeido.second )
 
         // Leer de EncryptedSharedPreferences
-        manejadorArchivo = EncriptedSharedPreferencesManager(this)
-        listadoLeido = manejadorArchivo.ReadInformation()
-        Log.d("TAG", "EncryptedSharedPreferences: ${listadoLeido.toList()}")
+        //manejadorArchivo = EncriptedSharedPreferencesManager(this)
+        //listadoLeido = manejadorArchivo.ReadInformation()
+        //Log.d("TAG", "EncryptedSharedPreferences: ${listadoLeido.toList()}")
 
         // Leer de Archivo Interno
         manejadorArchivo = FileInternalManager(this)
